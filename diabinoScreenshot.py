@@ -147,19 +147,19 @@ def datumKeres(driver, keresettDatum):
 
 
 def hasznalatiUtasitasok():
-    print("Program használata: ")
-    print("\t\tA programnak 3 féle módja van: ")
+    print("Script használata: ")
+    print("\t\tA scriptnek 3 féle módja van: ")
     print("\t\t\t1, diabinoScreenshot.py")
     print(
-        "\t\t\t\tA program bejelentkezik a DiaBinóban és a mai nap vércukor értékeit lefényképezi és elmenti a megadott mappába")
+        "\t\t\t\tA script bejelentkezik a DiaBinóban és a mai nap vércukor értékeit lefényképezi és elmenti a megadott mappába")
     print("\t\t\t2, diabinoScreenshot.py ÉÉÉÉ-HH-NN")
     print(
-        "\t\t\t\tA program bejelentkezik a DiaBinóban és a megadott dátumokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába")
+        "\t\t\t\tA script bejelentkezik a DiaBinóban és a megadott dátumokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába")
     print("\t\t\t3, diabinoScreenshot.py ÉÉÉÉ-HH-NN ÉÉÉÉ-HH-NN")
     print(
-        "\t\t\t\tA program bejelentkezik a DiaBinóban és a megadott intervallumon lévő napokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába\n")
+        "\t\t\t\tA script bejelentkezik a DiaBinóban és a megadott intervallumon lévő napokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába\n")
     print("\t\tMegfelelő dátum beviteli formátum: \"ÉÉÉÉ-HH-NN\" (pl:2020-07-27)")
-    print("\t\tBeállítások 
+    print("\t\tBeállítások a settings.ini fájlban találhatóak abban a mappában ahol a script van")
 
 
 
@@ -260,6 +260,6 @@ else:
     hasznalatiUtasitasok()
 
 if KOMMENTEK:
-    print("Program lefutott!")
+    print("Script lefutott!")
 
 driver.close()
