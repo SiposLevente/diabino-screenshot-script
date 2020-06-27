@@ -67,7 +67,7 @@ def bejelentkezes(EMAIL, JELSZO, driver, comments):
         print("Oldal betöltött!")
 
 def kepKeszitese(KEPEKMAPPA, driver, datum, comments):
-    element = driver.find_element_by_xpath("//div[@class='v-card v-sheet theme--light']")
+    element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[1]/div[1]")
     if comments:
         print("Kép készítése...")
     driver.execute_script('''
