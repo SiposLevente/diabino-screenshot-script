@@ -151,15 +151,16 @@ def hasznalatiUtasitasok():
     print("\t\tA programnak 3 féle módja van: ")
     print("\t\t\t1, diabinoScreenshot.py")
     print(
-        "\t\t\t\tA program bejelentkezik a diabinóba és a mai nap vércukor értékeit lefényképezi és elmenti a megadott mappába")
+        "\t\t\t\tA program bejelentkezik a DiaBinóban és a mai nap vércukor értékeit lefényképezi és elmenti a megadott mappába")
     print("\t\t\t2, diabinoScreenshot.py ÉÉÉÉ-HH-NN")
     print(
-        "\t\t\t\tA program bejelentkezik a diabinóba és a megadott dátumothoz tartozó adatokat lefényképezi és elmenti a megadot mappába")
+        "\t\t\t\tA program bejelentkezik a DiaBinóban és a megadott dátumokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába")
     print("\t\t\t3, diabinoScreenshot.py ÉÉÉÉ-HH-NN ÉÉÉÉ-HH-NN")
     print(
-        "\t\t\t\tA program bejelentkezik a diabinóba és a megadott intervallumon lévő napokhoz tartozó adatokat lefényképezi és elmenti a megadot mappába\n")
+        "\t\t\t\tA program bejelentkezik a DiaBinóban és a megadott intervallumon lévő napokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába\n")
     print("\t\tMegfelelő dátum beviteli formátum: \"ÉÉÉÉ-HH-NN\" (pl:2020-07-27)")
-    print("\t\tBeállítások a settings.txt fájlban találhatóak abban a mappában ahol a program található")
+    print("\t\tBeállítások 
+
 
 
 def datumTeszt(stringDatum, driver):
@@ -190,7 +191,7 @@ config.read('settings.ini')
 try:
     EMAIL = config["ADATOK"]["email"]
     JELSZO = config["ADATOK"]["jelszo"]
-    KEPEKMAPPA = config["ADATOK"]["kepekmappa"].replace('\\', '\\\\')
+    KEPEKMAPPA = config["ADATOK"]["kepekmappa"]
     KOMMENTEK = bool(int(config["ADATOK"]["kommentek"]))
 except KeyError:
     exit("Konfigurációs file nem megfelelően van kitöltve vagy nem létezik!")
