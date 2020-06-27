@@ -48,3 +48,8 @@ Itt lehet megadni, hogy a script a futása közben kommentálja, hogy éppen mit
 ```
 kommentek = 1
 ```
+
+# WebDriverek
+A script a firefox geckodriver-ét használja, a webdriverek a driver mappában találhatóak.
+
+Link a geckodriverhez: https://github.com/mozilla/geckodriver/releases
