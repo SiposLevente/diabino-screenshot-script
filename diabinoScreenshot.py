@@ -212,10 +212,10 @@ options.headless = True
 
 if platform == "linux" or platform == "linux2":
     driver = webdriver.Firefox(options=options, executable_path=r'./driver/lin/geckodriver',
-                               service_log_path=r'/dev/null/geckodriver.log')
+                               service_log_path=r'/tmp/geckodriver.log')
 elif platform == "darwin":
     driver = webdriver.Firefox(options=options, executable_path=r'./driver/mac/geckodriver',
-                               service_log_path=r'/dev/null/geckodriver.log')
+                               service_log_path=r'/tmp/geckodriver.log')
 else:
     driver = webdriver.Firefox(options=options, executable_path=r'.\driver\win\geckodriver.exe',
                                service_log_path=r'C:\Windows\Temp\geckodriver.log')
