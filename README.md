@@ -1,4 +1,14 @@
-# Még tesztelés alatt
+# Tartalom
+- [DiaBino-Screenshot-Script](#diabino-screenshot-script)
+- [A Script működése](#a-script-működése)
+- [Settings.ini](#settingsini)
+  * [email](#email)
+  * [jelszo](#jelszo)
+  * [kepekmappa](#kepekmappa)
+  * [kommentek](#kommentek)
+- [WebDriverek](#webdriverek)
+- [Plusz Tennivalók Linux és Mac rendszerelen](#plusz-tennivalók-linux-és-mac-rendszerelen)
+
 
 # DiaBino-Screenshot-Script
 Ez az alkalmazás lehetővé teszi, hogy a DiaBino oldalról az adatokat lementsük képek formájában.
@@ -53,3 +63,11 @@ kommentek = 1
 A script a firefox geckodriver-ét használja, a webdriverek a driver mappában találhatóak.
 
 Link a geckodriverhez: https://github.com/mozilla/geckodriver/releases
+
+
+# Plusz Tennivalók Linux és Mac rendszerelen
+A geckodriver fájlt a driver mappában futtathatóvá kell tenni. Ezt a következő parancsal tudjuk megtenni:
+```
+chmod +x geckodriver
+```
+
