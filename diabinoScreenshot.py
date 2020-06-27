@@ -76,7 +76,7 @@ def kepKeszitese(KEPEKMAPPA, driver, datum, comments):
                 element[index].parentNode.removeChild(element[index]);
             }
         ''')
-    sleep(1)
+    sleep(3)
     if platform == "linux" or platform == "linux2" or platform == "darwin":
         element.screenshot(str(KEPEKMAPPA) + '/%s.png' % datum.strftime('%Y%m%d'))
     elif platform == "win32":
