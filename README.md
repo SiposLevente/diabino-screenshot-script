@@ -16,15 +16,15 @@ Ez az alkalmazás lehetővé teszi, hogy a DiaBino oldalról az adatokat lements
 # A Script működése
 
 A programnak 3 féle módja van
-1. diabinoScreenshot.py
+1. **diabinoScreenshot.py**
 
     A program bejelentkezik a DiaBinoba és a mai nap vércukor értékeit lefényképezi és elmenti a megadott mappába"
    
-1. diabinoScreenshot.py "ÉÉÉÉ-HH-NN"
+1. **diabinoScreenshot.py "ÉÉÉÉ-HH-NN"**
 
     A program bejelentkezik a DiaBinoba és a megadott dátumokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába"
 
-1. diabinoScreenshot.py "ÉÉÉÉ-HH-NN" "ÉÉÉÉ-HH-NN"
+1. **diabinoScreenshot.py "ÉÉÉÉ-HH-NN" "ÉÉÉÉ-HH-NN"**
 
     A program bejelentkezik a DiaBino és a megadott intervallumon lévő napokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába
  
