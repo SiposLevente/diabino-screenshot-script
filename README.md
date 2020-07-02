@@ -95,7 +95,7 @@ Link a geckodriverhez: https://github.com/mozilla/geckodriver/releases
 
 Link a chromedriverhez: https://chromedriver.chromium.org/downloads
 
-# Plusz Tennivalók Linux és Mac rendszerelen
+# Plusz tennivalók Linux és Mac rendszerelen
 A geckodriver/chromedriver fájlt a driver mappában futtathatóvá kell tenni. Ezt a következő parancsal tudjuk megtenni:
 ```
 chmod +x geckodriver
