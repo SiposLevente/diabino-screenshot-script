@@ -11,6 +11,7 @@
   * [kommentek](#kommentek)
 - [WebDriverek](#webdriverek)
 - [Plusz Tennivalók Linux és Mac rendszerelen](#plusz-tennivalók-linux-és-mac-rendszerelen)
+- [Fontos dolgok!!!](#fontos-dolgok!!!)
 
 # DiaBino-Screenshot-Script
 Ez az alkalmazás lehetővé teszi, hogy a DiaBino oldalról az adatokat lementsük képek formájában.
@@ -103,3 +104,7 @@ chmod +x geckodriver
 ```
 chmod +x chromedriver
 ```
+
+# Fontos dolgok!!!
+
+#### **A "settings.ini" fájlt csak olyan emberekkel oszd meg akikben megbízol mivel**
