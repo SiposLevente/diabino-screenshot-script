@@ -67,8 +67,10 @@ Itt lehet megadni, hogy a script a futása közben kommentálja, hogy éppen mit
 kommentek = 1
 ```
 ## webdriver
-Itt lehet kiválasztani hogy a program melyik webdrivert használja, olyan webdrivert használjunk mint amilyen böngésző van a gépünön
-
+Itt lehet kiválasztani hogy a program melyik webdrivert használja, olyan webdrivert használjunk mint amilyen böngésző van a gépünkön. Lehetséges értékek: "firefox", "chrome"
+```
+webdriver = firefox
+```
 
 # WebDriverek
 A webdriverek a driver mappában találhatóak.
