@@ -21,6 +21,14 @@ Windows felületen Microsoft Visual C++, ezt [innen](https://support.microsoft.c
 
 [Firefox](https://www.mozilla.org/hu/firefox/new/) vagy [Chrome](https://www.google.com/intl/hu/chrome/) böngésző
 
+A webdrivert aszerint válasszuk ki hogy milyen böngésző van a gépünkre telepítve.
+
+Webdriverek beszerezhetőek itt:
+
+[Firefox webdriver (geckodriver)](https://github.com/mozilla/geckodriver/releases)
+
+[Chrome webdriver (chromedriver)](https://chromedriver.chromium.org/downloads)
+
 # A Script működése
 
 A programnak 3 féle módja van
