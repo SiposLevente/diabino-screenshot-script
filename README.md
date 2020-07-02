@@ -1,4 +1,4 @@
-# A program jelenleg tesztelés alatt áll! Jelenleg a program még csak firefox-al működik
+# A program jelenleg tesztelés alatt áll!
 
 # Tartalom
 - [DiaBino-Screenshot-Script](#diabino-screenshot-script)
