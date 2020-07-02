@@ -8,7 +8,6 @@ from sys import argv
 from sys import exit
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.options import Options
 
 
 def melyikHonap(honap):
@@ -67,7 +66,8 @@ def bejelentkezes(EMAIL, JELSZO, driver, comments):
         print("Bejelentkezés sikeres!")
         print("Oldal betöltött!")
 
-def kepKeszitese(KEPEKMAPPA, driver, datum, comments):
+
+def kepKeszitese(KEPEKMAPPA, driver, driverType, datum, comments):
     element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[1]/div[1]")
     if comments:
         print("Kép készítése...")
@@ -78,65 +78,75 @@ def kepKeszitese(KEPEKMAPPA, driver, datum, comments):
             }
         ''')
     sleep(3)
-    if platform == "linux" or platform == "linux2" or platform == "darwin":
-        element.screenshot(str(KEPEKMAPPA) + '/%s.png' % datum.strftime('%Y%m%d'))
-    elif platform == "win32":
-        element.screenshot(str(KEPEKMAPPA) + '\\%s.png' % datum.strftime('%Y%m%d'))
+    if driverType == "firefox":
+        if platform == "linux" or platform == "linux2" or platform == "darwin":
+            element.screenshot(str(KEPEKMAPPA) + '/%s.png' % datum.strftime('%Y%m%d'))
+        elif platform == "win32":
+            element.screenshot(str(KEPEKMAPPA) + '\\%s.png' % datum.strftime('%Y%m%d'))
+    else:
+        element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[1]/div[1]")
+        total_height = element.size["height"] + 1000
+        driver.set_window_size(1920, total_height)
+        sleep(3)
+        if platform == "linux" or platform == "linux2" or platform == "darwin":
+            element.screenshot(element.screenshot(str(KEPEKMAPPA) + '/%s.png' % datum.strftime('%Y%m%d')))
+        elif platform == "win32":
+            element.screenshot(str(KEPEKMAPPA) + '\\%s.png' % datum.strftime('%Y%m%d'))
+
     if comments:
         print("Kép elkészült!")
 
 
 def napLeptet(driver, balra):
     # ha balra:"True" akkor jobbra lép, ha balra:"False" akkor jobbra lép
+
     driver.set_window_size(450, 820)
+
     if balra:
-        element = driver.find_element_by_xpath(
-            "/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div/div[1]/div[1]/div[3]/div[3]/div/div/div[2]/button")
+        element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div/div[1]/div[1]/div[3]/div[3]/div/div/div[2]/button")
     else:
-        element = driver.find_element_by_xpath(
-            "/html/body/div[3]/div/div/div/main/div/div/div[2]/div[2]/div/div[1]/div[1]/div[3]/div[3]/div/div/div[4]/button")
+        element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div/main/div/div/div[2]/div[2]/div/div[1]/div[1]/div[3]/div[3]/div/div/div[4]/button")
+
     sleep(0.5)
     element.click()
     driver.set_window_size(1920, 1080)
 
 
-def honapLeptet(driver, balra):
+def honapLeptet(driver, driverType, balra):
     # ha balra:"True" akkor jobbra lép, ha balra:"False" akkor jobbra lép
+    if driverType == "chrome":
+        sleep(1)
     if balra:
-        element = driver.find_element_by_xpath(
-            "/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[1]/button/span/i")
+        element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[1]/button/span/i")
     else:
-        element = driver.find_element_by_xpath(
-            "/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[3]/button/span/i")
+        element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[3]/button/span/i")
     element.click()
 
 
 def getDatum(driver):
-    dateSting = driver.find_element_by_xpath(
-        "/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/div/div/div/div[2]/div[2]").text
-    dateSting = dateSting + " " + driver.find_element_by_xpath(
-        "/html/body/div[3]/div/div/div/main/div/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/div/div/div/div[1]/strong").text
+    dateSting = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/div/div/div/div[2]/div[2]").text
+    dateSting = dateSting + " " + driver.find_element_by_xpath("/html/body/div[3]/div/div/div/main/div/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/div/div/div/div[1]/strong").text
     dateSting = dateSting.replace('.', '')
     datum = dateSting.split(' ')
     datum[1] = melyikHonap(datum[1])
     return datum
 
 
-def datumKeres(driver, keresettDatum):
+def datumKeres(driver, driverType, keresettDatum):
     while int(getDatum(driver)[0]) != int(keresettDatum[0]):
         if int(getDatum(driver)[0]) > int(keresettDatum[0]):
             for i in range(0, 12):
-                honapLeptet(driver, True)
+                honapLeptet(driver, driverType, True)
         if int(getDatum(driver)[0]) < int(keresettDatum[0]):
             for i in range(0, 12):
-                honapLeptet(driver, False)
+                honapLeptet(driver, driverType, False)
 
     while int(getDatum(driver)[1]) != int(keresettDatum[1]):
         if int(getDatum(driver)[1]) > int(keresettDatum[1]):
-            honapLeptet(driver, True)
+            honapLeptet(driver, driverType, True)
 
         if int(getDatum(driver)[1]) < int(keresettDatum[1]):
-            honapLeptet(driver, False)
+            honapLeptet(driver, driverType, False)
     sleep(2)
     while int(getDatum(driver)[2]) != int(keresettDatum[2]):
         if int(getDatum(driver)[2]) > int(keresettDatum[2]):
@@ -151,17 +161,13 @@ def hasznalatiUtasitasok():
     print("Script használata: ")
     print("\t\tA scriptnek 3 féle módja van: ")
     print("\t\t\t1, diabinoScreenshot.py")
-    print(
-        "\t\t\t\tA script bejelentkezik a DiaBinóban és a mai nap vércukor értékeit lefényképezi és elmenti a megadott mappába")
+    print("\t\t\t\tA script bejelentkezik a DiaBinóban és a mai nap vércukor értékeit lefényképezi és elmenti a megadott mappába")
     print("\t\t\t2, diabinoScreenshot.py ÉÉÉÉ-HH-NN")
-    print(
-        "\t\t\t\tA script bejelentkezik a DiaBinóban és a megadott dátumokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába")
+    print("\t\t\t\tA script bejelentkezik a DiaBinóban és a megadott dátumokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába")
     print("\t\t\t3, diabinoScreenshot.py ÉÉÉÉ-HH-NN ÉÉÉÉ-HH-NN")
-    print(
-        "\t\t\t\tA script bejelentkezik a DiaBinóban és a megadott intervallumon lévő napokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába\n")
+    print("\t\t\t\tA script bejelentkezik a DiaBinóban és a megadott intervallumon lévő napokhoz tartozó adatokat lefényképezi és elmenti a megadott mappába\n")
     print("\t\tMegfelelő dátum beviteli formátum: \"ÉÉÉÉ-HH-NN\" (pl:2020-07-27)")
     print("\t\tBeállítások a settings.ini fájlban találhatóak abban a mappában ahol a script van")
-
 
 
 def datumTeszt(stringDatum, driver):
@@ -186,6 +192,39 @@ def datumTeszt(stringDatum, driver):
                 exit("Megadott dátum jövőbeli!")
 
 
+def initDriver(driverType, headLess):
+    driver = None
+    if driverType == "firefox":
+        from selenium.webdriver.firefox.options import Options
+        options = Options()
+        options.log.level = "fatal"
+        options.headless = headLess
+
+        if platform == "linux" or platform == "linux2":
+            driver = webdriver.Firefox(options=options, executable_path=r'./driver/lin/geckodriver', service_log_path=r'/tmp/geckodriver.log')
+        elif platform == "darwin":
+            driver = webdriver.Firefox(options=options, executable_path=r'./driver/mac/geckodriver', service_log_path=r'/tmp/geckodriver.log')
+        else:
+            driver = webdriver.Firefox(options=options, executable_path=r'.\driver\win\geckodriver.exe', service_log_path=r'C:\Windows\Temp\geckodriver.log')
+
+    elif driverType == "chrome":
+        from selenium.webdriver.chrome.options import Options
+        chrome_options = Options()
+
+        if headLess:
+            chrome_options.add_argument("--headless")
+
+        if platform == "linux" or platform == "linux2":
+            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\lin\chromedriver', service_args=["--log-path=/tmp/chromedriver.log"])
+        elif platform == "darwin":
+            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\mac\chromedriver', service_args=["--log-path=/tmp/chromedriver.log"])
+        else:
+            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\win\chromedriver.exe', service_args=["--log-path=C:\\Windows\\Temp\\chromedriver.log"])
+    else:
+        exit("Nem megfelelő driver a konfigurációs fájlban")
+    return driver
+
+
 # -----------------------------------BEÁLLíTÁSOK-----------------------------------
 config = configparser.ConfigParser()
 config.read('settings.ini')
@@ -194,32 +233,17 @@ try:
     JELSZO = config["ADATOK"]["jelszo"]
     KEPEKMAPPA = config["ADATOK"]["kepekmappa"]
     KOMMENTEK = bool(int(config["ADATOK"]["kommentek"]))
+    DRIVER = config["ADATOK"]["webdriver"]
 except KeyError:
     exit("Konfigurációs file nem megfelelően van kitöltve vagy nem létezik!")
 
 # ---------------------------------------------------------------------------------
 
+driver = initDriver(DRIVER, True)
+
 if not os.path.isdir(str(KEPEKMAPPA)):
     print("Képek mappa létrehozva!")
     os.mkdir(str(KEPEKMAPPA))
-
-options = Options()
-options.log.level = "fatal"
-
-# -----------------------
-# Villogó ablakok fognak megjelenni ha ezt kikapcsoljuk, epilepszia veszély!!!
-options.headless = True
-# -----------------------
-
-if platform == "linux" or platform == "linux2":
-    driver = webdriver.Firefox(options=options, executable_path=r'./driver/lin/geckodriver',
-                               service_log_path=r'/tmp/geckodriver.log')
-elif platform == "darwin":
-    driver = webdriver.Firefox(options=options, executable_path=r'./driver/mac/geckodriver',
-                               service_log_path=r'/tmp/geckodriver.log')
-else:
-    driver = webdriver.Firefox(options=options, executable_path=r'.\driver\win\geckodriver.exe',
-                               service_log_path=r'C:\Windows\Temp\geckodriver.log')
 
 if len(argv) == 3:
     datumTeszt(argv[1], driver)
@@ -238,8 +262,8 @@ if len(argv) == 3:
     counter = 1
     while startDate != endDate:
         startDateArray = [startDate.year, startDate.month, startDate.day]
-        datumKeres(driver, startDateArray)
-        kepKeszitese(KEPEKMAPPA, driver, startDate, KOMMENTEK)
+        datumKeres(driver, DRIVER, startDateArray)
+        kepKeszitese(KEPEKMAPPA, driver, DRIVER, startDate, KOMMENTEK)
         startDate = startDate + datetime.timedelta(days=1)
         if KOMMENTEK:
             print("[" + str(counter) + "/" + str(deltaDays) + "]")
@@ -249,13 +273,13 @@ elif len(argv) == 2:
     datumTeszt(argv[1], driver)
     bejelentkezes(EMAIL, JELSZO, driver, KOMMENTEK)
     keresettDatum = argv[1].split('-')
-    datumKeres(driver, keresettDatum)
+    datumKeres(driver, DRIVER, keresettDatum)
     datum = datetime.datetime(int(keresettDatum[0]), int(keresettDatum[1]), int(keresettDatum[2]))
-    kepKeszitese(KEPEKMAPPA, driver, datum, KOMMENTEK)
+    kepKeszitese(KEPEKMAPPA, driver, DRIVER, datum, KOMMENTEK)
 
 elif len(argv) == 1:
     bejelentkezes(EMAIL, JELSZO, driver, KOMMENTEK)
-    kepKeszitese(KEPEKMAPPA, driver, datetime.datetime.now(), KOMMENTEK)
+    kepKeszitese(KEPEKMAPPA, driver, DRIVER, datetime.datetime.now(), KOMMENTEK)
 
 else:
     hasznalatiUtasitasok()
