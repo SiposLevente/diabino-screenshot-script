@@ -72,6 +72,12 @@ Itt lehet kiválasztani hogy a program melyik webdrivert használja, olyan webdr
 webdriver = firefox
 ```
 
+vagy
+
+```
+webdriver = chrome
+```
+
 # WebDriverek
 A webdriverek a driver mappában találhatóak.
 
