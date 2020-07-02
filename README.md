@@ -29,6 +29,8 @@ Webdriverek beszerezhetőek itt:
 
 [Chrome webdriver (chromedriver)](https://chromedriver.chromium.org/downloads)
 
+### **A webdrivereket a driver mappában abba az almappába helyezzük amilyen rendszerünk van (Windows=win, Linux=lin, Mac=mac)**
+
 # A Script működése
 
 A programnak 3 féle módja van
