@@ -1,5 +1,8 @@
+# A program jelenleg tesztelés alatt áll! Jelenleg a program még csak firefox-al működik
+
 # Tartalom
 - [DiaBino-Screenshot-Script](#diabino-screenshot-script)
+- [Script működéséhez szükséges előkövetelmények](#script-működéséhez-szükséges-előkövetelmények)
 - [A Script működése](#a-script-működése)
 - [Settings.ini](#settingsini)
   * [email](#email)
@@ -9,9 +12,14 @@
 - [WebDriverek](#webdriverek)
 - [Plusz Tennivalók Linux és Mac rendszerelen](#plusz-tennivalók-linux-és-mac-rendszerelen)
 
-
 # DiaBino-Screenshot-Script
 Ez az alkalmazás lehetővé teszi, hogy a DiaBino oldalról az adatokat lementsük képek formájában.
+
+
+# Script működéséhez szükséges előkövetelmények
+Windows felületen Microsoft Visual C++, ezt [innen](https://support.microsoft.com/hu-hu/help/2977003/the-latest-supported-visual-c-downloads) le lehet tölteni
+
+[Firefox](https://www.mozilla.org/hu/firefox/new/) vagy [Chrome](https://www.google.com/intl/hu/chrome/) böngésző
 
 # A Script működése
 
