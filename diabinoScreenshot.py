@@ -58,6 +58,7 @@ def bejelentkezes(EMAIL, JELSZO, driver, comments):
     try:
         element = driver.find_element_by_xpath("//a[@href='/hu/diary']")
     except:
+        driver.close()
         exit("Bejelentkezés nem sikerült!")
 
     element.click()
