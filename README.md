@@ -66,16 +66,22 @@ Itt lehet megadni, hogy a script a futása közben kommentálja, hogy éppen mit
 ```
 kommentek = 1
 ```
+## webdriver
+Itt lehet kiválasztani hogy a program melyik webdrivert használja, olyan webdrivert használjunk mint amilyen böngésző van a gépünön
+
 
 # WebDriverek
-A script a firefox geckodriver-ét használja, a webdriverek a driver mappában találhatóak.
+A webdriverek a driver mappában találhatóak.
 
 Link a geckodriverhez: https://github.com/mozilla/geckodriver/releases
 
+Link a chromedriverhez: https://chromedriver.chromium.org/downloads
 
 # Plusz Tennivalók Linux és Mac rendszerelen
-A geckodriver fájlt a driver mappában futtathatóvá kell tenni. Ezt a következő parancsal tudjuk megtenni:
+A geckodriver/chromedriver fájlt a driver mappában futtathatóvá kell tenni. Ezt a következő parancsal tudjuk megtenni:
 ```
 chmod +x geckodriver
 ```
-
+```
+chmod +x chromedriver
+```
