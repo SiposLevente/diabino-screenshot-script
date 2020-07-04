@@ -1,0 +1,5 @@
+Ebbe a mappába kell rakni a webdrivert
+
+A webdriverek beszerezhetőek innen:
+firefox: https://github.com/mozilla/geckodriver/releases
+chrome: https://chromedriver.chromium.org/downloads
