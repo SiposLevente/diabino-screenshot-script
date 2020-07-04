@@ -11,7 +11,7 @@
   * [kommentek](#kommentek)
 - [WebDriverek](#webdriverek)
 - [Plusz Tennivalók Linux és Mac rendszerelen](#plusz-tennivalók-linux-és-mac-rendszerelen)
-- [Fontos dolgok!!!](#fontos-dolgok!!!)
+- [Fontos dolgok!!!](#fontos-dolgok)
 
 # DiaBino-Screenshot-Script
 Ez az alkalmazás lehetővé teszi, hogy a DiaBino oldalról az adatokat lementsük képek formájában.
@@ -90,7 +90,7 @@ webdriver = chrome
 ```
 
 # WebDriverek
-A webdriverek a driver mappában találhatóak.
+A webdriverek a driver mappába kell helyezni.
 
 Link a geckodriverhez: https://github.com/mozilla/geckodriver/releases
 
