@@ -30,7 +30,7 @@ Webdriverek beszerezhetőek itt:
 
 [Chrome webdriver (chromedriver)](https://chromedriver.chromium.org/downloads)
 
-### **A webdrivereket a driver mappában abba az almappába helyezzük amilyen rendszerünk van (Windows=win, Linux=lin, Mac=mac)**
+### **A letöltött webdrivert a driver mappába kell helyezni.**
 
 # A Script működése
 
@@ -90,7 +90,7 @@ webdriver = chrome
 ```
 
 # WebDriverek
-A webdriverek a driver mappába kell helyezni.
+A webdrivereket a driver mappába kell helyezni.
 
 Link a geckodriverhez: https://github.com/mozilla/geckodriver/releases
 
