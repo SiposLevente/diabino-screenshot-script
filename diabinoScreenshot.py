@@ -10,6 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
+# Adott string hónap hanyadik hónap
 def melyikHonap(honap):
     honap = honap.lower()
     if honap == "január":
@@ -38,6 +39,7 @@ def melyikHonap(honap):
         return 12
 
 
+# DiaBino-ba bejelentkezés
 def bejelentkezes(EMAIL, JELSZO, driver, comments):
     if comments:
         print("Bejelentkezés...")
@@ -67,6 +69,7 @@ def bejelentkezes(EMAIL, JELSZO, driver, comments):
         print("Oldal betöltött!")
 
 
+# Kép készítése
 def kepKeszitese(KEPEKMAPPA, driver, driverType, datum, comments):
     element = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[1]/div[1]")
     if comments:
@@ -97,9 +100,8 @@ def kepKeszitese(KEPEKMAPPA, driver, driverType, datum, comments):
         print("Kép elkészült!")
 
 
+# Nap léptetése, ha balra:"True" akkor jobbra lép, ha balra:"False" akkor jobbra lép
 def napLeptet(driver, balra):
-    # ha balra:"True" akkor jobbra lép, ha balra:"False" akkor jobbra lép
-
     driver.set_window_size(450, 820)
 
     if balra:
@@ -112,8 +114,8 @@ def napLeptet(driver, balra):
     driver.set_window_size(1920, 1080)
 
 
+# Honap léptetése, ha balra:"True" akkor jobbra lép, ha balra:"False" akkor jobbra lép
 def honapLeptet(driver, driverType, balra):
-    # ha balra:"True" akkor jobbra lép, ha balra:"False" akkor jobbra lép
     if driverType == "chrome":
         sleep(1)
     if balra:
@@ -123,6 +125,7 @@ def honapLeptet(driver, driverType, balra):
     element.click()
 
 
+# A script éppen melyik napnál tart
 def getDatum(driver):
     dateSting = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/main/div/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/div/div/div/div[2]/div[2]").text
     dateSting = dateSting + " " + driver.find_element_by_xpath("/html/body/div[3]/div/div/div/main/div/div/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/div/div/div/div[1]/strong").text
@@ -132,6 +135,7 @@ def getDatum(driver):
     return datum
 
 
+# Adott dátumhoz lépés
 def datumKeres(driver, driverType, keresettDatum):
     while int(getDatum(driver)[0]) != int(keresettDatum[0]):
         if int(getDatum(driver)[0]) > int(keresettDatum[0]):
@@ -157,6 +161,7 @@ def datumKeres(driver, driverType, keresettDatum):
     sleep(3)
 
 
+# Script használatát kiíró script
 def hasznalatiUtasitasok():
     print("Script használata: ")
     print("\t\tA scriptnek 3 féle módja van: ")
@@ -170,6 +175,7 @@ def hasznalatiUtasitasok():
     print("\t\tBeállítások a settings.ini fájlban találhatóak abban a mappában ahol a script van")
 
 
+# Helyes bemenet vizsgálat
 def datumTeszt(stringDatum, driver):
     datumArray = stringDatum.split("-")
     if len(datumArray) != 3:
@@ -192,6 +198,7 @@ def datumTeszt(stringDatum, driver):
                 exit("Megadott dátum jövőbeli!")
 
 
+# Chrome vagy Firefox webdriver létrehozása
 def initDriver(driverType, headLess):
     driver = None
     if driverType == "firefox":
@@ -199,13 +206,14 @@ def initDriver(driverType, headLess):
         options = Options()
         options.log.level = "fatal"
         options.headless = headLess
-
-        if platform == "linux" or platform == "linux2":
-            driver = webdriver.Firefox(options=options, executable_path=r'./driver/lin/geckodriver', service_log_path=r'/tmp/geckodriver.log')
-        elif platform == "darwin":
-            driver = webdriver.Firefox(options=options, executable_path=r'./driver/mac/geckodriver', service_log_path=r'/tmp/geckodriver.log')
+        if platform == "linux" or platform == "linux2" or platform == "darwin":
+            if not os.path.isfile("./driver/geckodriver"):
+                exit("Nincs 'geckodriver' file a './driver/' mappában!")
+            driver = webdriver.Firefox(options=options, executable_path=r'./driver/geckodriver', service_log_path=r'/tmp/geckodriver.log')
         else:
-            driver = webdriver.Firefox(options=options, executable_path=r'.\driver\win\geckodriver.exe', service_log_path=r'C:\Windows\Temp\geckodriver.log')
+            if not os.path.isfile(".\\driver\\geckodriver.exe"):
+                exit("Nincs 'geckodriver.exe' file a '.\\driver\\' mappában!")
+            driver = webdriver.Firefox(options=options, executable_path=r'.\driver\geckodriver.exe', service_log_path=r'C:\Windows\Temp\geckodriver.log')
 
     elif driverType == "chrome":
         from selenium.webdriver.chrome.options import Options
@@ -214,18 +222,20 @@ def initDriver(driverType, headLess):
         if headLess:
             chrome_options.add_argument("--headless")
 
-        if platform == "linux" or platform == "linux2":
-            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\lin\chromedriver', service_args=["--log-path=/tmp/chromedriver.log"])
-        elif platform == "darwin":
-            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\mac\chromedriver', service_args=["--log-path=/tmp/chromedriver.log"])
+        if platform == "linux" or platform == "linux2" or platform == "darwin":
+            if not os.path.isfile("./driver/chromedriver"):
+                exit("Nincs 'chromedriver' file a './driver/' mappában!")
+            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\chromedriver', service_args=["--log-path=/tmp/chromedriver.log"])
         else:
-            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\win\chromedriver.exe', service_args=["--log-path=C:\\Windows\\Temp\\chromedriver.log"])
+            if not os.path.isfile(r".\driver\chromedriver.exe"):
+                exit("Nincs 'chromedriver.exe' file a '.\\driver\\' mappában!")
+            driver = webdriver.Chrome(options=chrome_options, executable_path=r'.\driver\chromedriver.exe', service_args=["--log-path=C:\\Windows\\Temp\\chromedriver.log"])
     else:
         exit("Nem megfelelő driver a konfigurációs fájlban")
     return driver
 
 
-# -----------------------------------BEÁLLíTÁSOK-----------------------------------
+# Beállítások beolvasása settings.ini fájlból
 config = configparser.ConfigParser()
 config.read('settings.ini')
 try:
@@ -237,14 +247,15 @@ try:
 except KeyError:
     exit("Konfigurációs file nem megfelelően van kitöltve vagy nem létezik!")
 
-# ---------------------------------------------------------------------------------
-
+# Driver létrehozása
 driver = initDriver(DRIVER, True)
 
+# Képek mappa létezésének vizsgálata
 if not os.path.isdir(str(KEPEKMAPPA)):
     print("Képek mappa létrehozva!")
     os.mkdir(str(KEPEKMAPPA))
 
+# 2 argumentum lekezelése, ez két dátum közötti intervallumon készít képeket
 if len(argv) == 3:
     datumTeszt(argv[1], driver)
     datumTeszt(argv[2], driver)
@@ -269,6 +280,7 @@ if len(argv) == 3:
             print("[" + str(counter) + "/" + str(deltaDays) + "]")
             counter = counter + 1
 
+# 1 argumetnum lekezelése, egy adott dátumról készít képet
 elif len(argv) == 2:
     datumTeszt(argv[1], driver)
     bejelentkezes(EMAIL, JELSZO, driver, KOMMENTEK)
@@ -277,10 +289,12 @@ elif len(argv) == 2:
     datum = datetime.datetime(int(keresettDatum[0]), int(keresettDatum[1]), int(keresettDatum[2]))
     kepKeszitese(KEPEKMAPPA, driver, DRIVER, datum, KOMMENTEK)
 
+# 0 argumentum lekezelése, mai nap adatairól készít képet
 elif len(argv) == 1:
     bejelentkezes(EMAIL, JELSZO, driver, KOMMENTEK)
     kepKeszitese(KEPEKMAPPA, driver, DRIVER, datetime.datetime.now(), KOMMENTEK)
 
+# Hibás bemenet esetén kiírja hogy a scriptet hogyan lehet használni
 else:
     hasznalatiUtasitasok()
 
