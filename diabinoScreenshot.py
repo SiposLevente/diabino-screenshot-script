@@ -274,7 +274,15 @@ if len(argv) == 3:
     while startDate != endDate:
         startDateArray = [startDate.year, startDate.month, startDate.day]
         datumKeres(driver, DRIVER, startDateArray)
-        kepKeszitese(KEPEKMAPPA, driver, DRIVER, startDate, KOMMENTEK)
+
+        if KOMMENTEK:
+            if counter != 1:
+                kepKeszitese(KEPEKMAPPA, driver, DRIVER, startDate, False)
+            else:
+                kepKeszitese(KEPEKMAPPA, driver, DRIVER, startDate, KOMMENTEK)
+        else:
+            kepKeszitese(KEPEKMAPPA, driver, DRIVER, startDate, KOMMENTEK)
+
         startDate = startDate + datetime.timedelta(days=1)
         if KOMMENTEK:
             print("[" + str(counter) + "/" + str(deltaDays) + "]")
