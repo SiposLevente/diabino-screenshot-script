@@ -1,3 +1,4 @@
+# Nincs aktív fejlesztés alatt. Vaszinűleg nem is működik már! Ha érdeklődnél a program iránt akkor nyiss egy "Issue"-t!
 # A program jelenleg tesztelés alatt áll!
 
 # Tartalom
@@ -107,4 +108,4 @@ chmod +x chromedriver
 
 # Fontos dolgok!!!
 
-#### **A "settings.ini" fájlt csak olyan emberekkel oszd meg akikben megbízol mivel**
+#### **A "settings.ini" fájlt csak olyan emberekkel oszd meg akikben megbízol mivel a belépési adataidat tartalmazza!**
