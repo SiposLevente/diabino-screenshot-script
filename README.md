@@ -1,4 +1,4 @@
-# Nincs aktív fejlesztés alatt. Vaszinűleg nem is működik már! Ha érdeklődnél a program iránt akkor nyiss egy "Issue"-t!
+# Nincs aktív fejlesztés alatt. Valószinűleg nem is működik már, mivel az oldal elemeit figyeli, lehetséges, hogy átrendezték a weboldalt és ezért bizonyos elemeket nem talál meg a program! Ha érdeklődnél a program iránt akkor nyiss egy "Issue"-t!
 # A program jelenleg tesztelés alatt áll!
 
 # Tartalom
